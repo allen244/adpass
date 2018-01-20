@@ -12,10 +12,10 @@ public class Address extends AbstractDomain {
     private String city;
     private String state;
     private String zipCode;
-    @ManyToOne
+    @ManyToOne(fetch= FetchType.EAGER)
     private Partner partner;
 
-    @ManyToOne
+    @ManyToOne(fetch= FetchType.EAGER)
     private User user;
 
 

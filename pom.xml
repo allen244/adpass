@@ -77,12 +77,24 @@
 			<scope>test</scope>
 		</dependency>
 
-        <!--encryption lib-->
-        <dependency>
-            <groupId>org.jasypt</groupId>
-            <artifactId>jasypt</artifactId>
-            <version>1.9.2</version>
-        </dependency>
+        <!--&lt;!&ndash;encryption lib&ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.jasypt</groupId>-->
+            <!--<artifactId>jasypt</artifactId>-->
+            <!--<version>1.9.2</version>-->
+        <!--</dependency>-->
+
+		<!--<dependency>-->
+			<!--<groupId>org.jasypt</groupId>-->
+			<!--<artifactId>jasypt-springsecurity3</artifactId>-->
+			<!--<version>1.9.2</version>-->
+		<!--</dependency>-->
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
+			<version>3.0.2.RELEASE</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

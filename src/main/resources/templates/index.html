@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Login</title>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link href="../../static/css/spring-core.css"
+          th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>
+</head>
+<body >
+
+
+<div class="container" style="height: 100vh;">
+    <div class="row" >
+        <div class="col-md-12">
+            <h1>Spring Security Demo</h1>
+        </div>
+    </div>
+
+    <div class="row" sec:authorize="isAuthenticated()">
+        <div class="col-md-10 col-md-offset-2">
+            <h2 style="color:green">User is Logged In</h2>
+            <p sec:authentication="principal.username">userName</p>
+        </div>
+    </div>
+
+    <div class="row" sec:authorize="!isAuthenticated()">
+        <div class="col-md-10 col-md-offset-2">
+            <h2 style="color:red">User is Logged Out</h2>
+        </div>
+    </div>
+
+    <div class="row" sec:authorize="hasRole('USER')">
+        <div class="col-md-10 col-md-offset-2">
+            <h2>User Has Role Admin</h2>
+        </div>
+    </div>
+
+    <div class="row" sec:authorize="hasRole('ADMIN')">
+        <div class="col-md-10 col-md-offset-2">
+            <h2>User Has Role User</h2>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -11,37 +11,38 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 @Configuration
 public class AvsSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
-//    private AuthenticationProvider authenticationProvider;
-//
-//
-////    @Bean
-////    public PasswordEncoder passwordEncoder(StrongPasswordEncryptor passwordEncryptor) {
-////        PasswordEncoder passwordEncoder = new PasswordEncoder();
-////        passwordEncoder.setPasswordEncryptor(passwordEncryptor);
-////        return passwordEncoder;
-////    }
-//
-////    @Bean
-////    public DaoAuthenticationProvider daoAuthenticationProvider(PasswordEncoder passwordEncoder,
-////                                                               UserDetailsService userDetailsService) {
-////
-////        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-////        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
-////        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
-////        return daoAuthenticationProvider;
-////    }
-//
-//    @Autowired
-//    public void configureAuthManager(AuthenticationManagerBuilder authenticationManagerBuilder) {
-//        authenticationManagerBuilder.authenticationProvider(authenticationProvider);
-//    }
+    private AuthenticationProvider authenticationProvider;
+
+    @Autowired
+    @Qualifier("daoAuthenticationProvider")
+    public void setAuthenticationProvider(AuthenticationProvider authenticationProvider) {
+        this.authenticationProvider = authenticationProvider;
+    }
+
+
+    @Bean
+    public DaoAuthenticationProvider daoAuthenticationProvider(PasswordEncoder passwordEncoder,
+                                                               UserDetailsService userDetailsService) {
+
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
+        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
+        return daoAuthenticationProvider;
+    }
+
+
+    @Autowired
+    public void configureAuthManager(AuthenticationManagerBuilder authenticationManagerBuilder) {
+        authenticationManagerBuilder.authenticationProvider(authenticationProvider);
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -52,6 +53,8 @@ public class AvsSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests().antMatchers("/webjars/**").permitAll()
                 .and().authorizeRequests().antMatchers("/static/css").permitAll()
                 .and().authorizeRequests().antMatchers("/js").permitAll()
+                .and().authorizeRequests().antMatchers("/pay").permitAll()
+                .and().authorizeRequests().antMatchers("/register").permitAll()
                 .and().formLogin().loginPage("/login").permitAll();
 
 

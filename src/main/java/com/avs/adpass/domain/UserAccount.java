@@ -62,4 +62,16 @@ public class UserAccount extends AbstractDomain {
         this.user = user;
     }
 
+    public void deposit(BigDecimal amount) {
+        BigDecimal sum = this.getAccountBalance().add(amount);
+        this.setAccountBalance(sum);
+
+    }
+
+    public void debit(BigDecimal amount) {
+        BigDecimal remove = this.getAccountBalance().subtract(amount);
+        this.setAccountBalance(remove);
+
+    }
+
 }

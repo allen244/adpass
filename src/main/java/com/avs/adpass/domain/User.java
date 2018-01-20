@@ -1,8 +1,7 @@
 package com.avs.adpass.domain;
 
 
-import com.avs.adpass.services.security.EncryptionService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.avs.adpass.domain.security.Role;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -19,6 +18,14 @@ public class User extends AbstractDomain {
 
     @ManyToOne
     private Partner partner;
+
+
+    @ManyToMany(fetch=FetchType.EAGER, cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "user_role",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    private List<Role> roles = new ArrayList<>();
 
 
     @Column(name = "username", unique = true, columnDefinition = "VARCHAR(64)")
@@ -128,4 +135,28 @@ public class User extends AbstractDomain {
     public void setFailedLoginAttempts(Integer failedLoginAttempts) {
         this.failedLoginAttempts = failedLoginAttempts;
     }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    public void addRole(Role role) {
+        if (!this.roles.contains(role)) {
+            this.roles.add(role);
+        }
+
+        if (!role.getUsers().contains(this)) {
+            role.getUsers().add(this);
+        }
+    }
+
+    public void removeRole(Role role) {
+        this.roles.remove(role);
+        role.getUsers().remove(this);
+    }
+
 }
