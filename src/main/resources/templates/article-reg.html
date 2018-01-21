@@ -598,29 +598,33 @@
                                     suscipit. Cras sit amet magna nec arcu luctus viverra ut ut ex. Nullam in nibh vitae
                                     dui luctus auctor. Pellentesque sit amet hendrerit sem. Integer aliquam interdum
                                     ipsum, id volutpat ante elementum vitae.</p>
+
+
                                 <div class="paywallButtons">
-                                    <button class="btn btn-secondary" style="float: left;margin-left: 22%"
-                                            type="button">Continue with Ads
-                                    </button>
+                                    <button class="btn btn-secondary" style="float: left;margin-left: 22%" type="button">Continue with Ads</button>
                                     <button class="btn btn-primary" data-target="#myModal.bd-example-modal-lg"
                                             data-toggle="modal" style="float: left; margin-left: 10px" type="button"
                                             sec:authorize="!isAuthenticated()">
                                         Sign-Up for ADpass
                                     </button>
+                               <div class="btn-primary2" sec:authorize="isAuthenticated()"  th:if="${paid!=null}" th:replace="fragments/thankyou :: thankyou">
 
-
-                                    <a href="pay">Click here</a>
-
-                                    <div class="btn-primary2" sec:authorize="isAuthenticated()">
-
-
+                                        <!--<button class="btn btn-primary2" sec:authorize="isAuthenticated()" style="float: left; margin-left: 10px;" type="button">Pay Using Ad Pass</button>-->
+                                   <a href="/pay" class="btn btn-primary2" role="button" sec:authorize="isAuthenticated()" style="float: left; margin-left: 10px;" >Pay Using Ad Pass</a>
                                         <!--/*@thymesVar id="avsUser" type="com.avs.adpass.services.security.UserDetailsImpl"*/-->
                                         <div class="wallet" style="margin-left: 3px;margin-top:3px;float: left">
 
                                             Wallet: <span th:text="${avsUser.userAccount.accountBalance}"></span>
                                         </div>
                                     </div>
-                                </div><!-- Modal -->
+
+                             </div>
+
+
+                                </div>
+
+
+                                <!-- Modal -->
                                 <div aria-hidden="true" aria-labelledby="exampleModalLabel"
                                      class="modal fade bd-example-modal-lg" id="myModal" role="dialog" tabindex="-1">
                                     <div class="modal-dialog modal-lg" role="document">
@@ -648,13 +652,13 @@
                                                                     <input type="hidden" name="partner" vale="NYDN"/>
 
                                                                     Create a free account:<br>
-                                                                    <input name="username" placeholder="username"
+                                                                    <input name="username" placeholder="email"
                                                                            type="username"><br>
                                                                     <input name="email" placeholder="email"
                                                                            type="email"><br>
                                                                     <input name="password" placeholder="password"
                                                                            type="password"><br>
-                                                                    <input name="repeatpassword" placeholder="repeat password"
+                                                                    <input name="repe" placeholder="repeat password"
                                                                            type="password"><br>
 
                                                                     <button type="submit" class="submitBTN"
@@ -690,128 +694,130 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="paywallTrunk blur">
-                                            <p>Cras lobortis placerat tortor, et porttitor lacus vestibulum ac.
-                                                Suspendisse
-                                                volutpat tristique semper. Fusce convallis tortor eu eros tempor
-                                                imperdiet.
-                                                Donec porttitor ligula congue mauris semper feugiat. Nulla vitae gravida
-                                                neque.
-                                                Vestibulum vel odio finibus erat porttitor consectetur eget convallis
-                                                justo.
-                                                Cras fermentum convallis dui ac rhoncus. Mauris aliquet nibh sagittis mi
-                                                faucibus luctus. Nulla fringilla placerat ex ut condimentum. Morbi quam
-                                                mi,
-                                                pharetra ac vehicula ac, tempus quis nulla. Aenean laoreet, nisi
-                                                malesuada
-                                                convallis sagittis, justo sem tempus diam, at consectetur diam diam
-                                                vitae velit.
-                                                Nulla lacinia odio quis egestas rhoncus. In turpis arcu, feugiat a
-                                                congue eu,
-                                                venenatis vel sem. Nunc aliquet ut orci ut venenatis. Ut tortor turpis,
-                                                pulvinar
-                                                commodo posuere vel, iaculis vitae magna.</p>
-                                            <p>Fusce et arcu in lectus feugiat pulvinar quis in diam. Nulla facilisi.
-                                                Curabitur
-                                                vulputate sollicitudin consectetur. Pellentesque malesuada ac velit nec
-                                                iaculis.
-                                                Etiam nec elementum sapien. Vestibulum ut maximus massa, non ullamcorper
-                                                nibh.
-                                                Quisque tristique, ipsum sit amet convallis ultrices, justo leo
-                                                porttitor quam,
-                                                a vehicula odio leo vitae quam.</p>
-                                            <p>Nam vitae justo sit amet enim pellentesque blandit eget non massa. Cras
-                                                imperdiet
-                                                porttitor consequat. Nunc neque libero, condimentum eu augue et, tempor
-                                                malesuada nibh. Proin velit metus, ultrices quis pretium eget, blandit
-                                                vulputate
-                                                mauris. Aenean sollicitudin pretium magna sed ultrices. Pellentesque ut
-                                                est
-                                                magna. Donec cursus vehicula diam, at vulputate dui tincidunt et. Donec
-                                                id
-                                                efficitur diam. Ut a facilisis diam. Nulla mollis risus vel lorem
-                                                maximus
-                                                dapibus. Aenean vitae sapien massa. Ut et ante turpis. Duis egestas erat
-                                                tortor,
-                                                eu vulputate ex dapibus sit amet. Lorem ipsum dolor sit amet,
-                                                consectetur
-                                                adipiscing elit. Nulla luctus neque quam, sit amet rhoncus urna
-                                                tincidunt
-                                                vitae.</p>
-                                            <p>Cras venenatis, elit id ornare varius, nisl diam maximus felis, venenatis
-                                                volutpat erat metus vel leo. Sed ligula turpis, tristique non dolor a,
-                                                pulvinar
-                                                vehicula tortor. Nunc malesuada malesuada libero non condimentum. Sed
-                                                sapien
-                                                felis, aliquet in ipsum non, tincidunt commodo nibh. Nulla eget lectus
-                                                eget
-                                                lorem dignissim molestie vitae quis orci. Suspendisse enim tortor,
-                                                congue vitae
-                                                ullamcorper eget, sagittis rhoncus leo. Aliquam sagittis ut ante a
-                                                egestas.</p>
-                                            <p>Vivamus viverra erat orci, ut porttitor orci gravida sodales. Curabitur
-                                                suscipit
-                                                sem sapien, et maximus elit tincidunt a. Nunc lacinia finibus viverra.
-                                                Nulla
-                                                sodales sapien vitae urna pretium, sit amet feugiat augue hendrerit.
-                                                Cras ipsum
-                                                nunc, placerat eget sapien et, bibendum faucibus magna. Nullam quis
-                                                augue a
-                                                justo tempus tincidunt et eu mi. Proin semper diam sit amet blandit
-                                                rutrum.
-                                                Proin vulputate massa nisl, ut pharetra tellus dapibus sed.</p>
-                                            <p>Curabitur felis sapien, ultrices id auctor sit amet, bibendum sit amet
-                                                nisl.
-                                                Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque eu
-                                                pellentesque erat. Vivamus pharetra magna eget risus luctus
-                                                sollicitudin. Proin
-                                                rutrum, augue id dapibus eleifend, erat arcu semper eros, id posuere
-                                                enim sem a
-                                                tortor. Morbi placerat, nibh id condimentum ultricies, est sem rutrum
-                                                sem, at
-                                                elementum neque turpis sed tellus. Integer blandit vehicula dui, id
-                                                dictum sem
-                                                egestas lobortis. Vivamus vel pretium elit. Nulla accumsan ipsum sed
-                                                libero
-                                                sagittis, id egestas dolor ullamcorper. Sed ultricies risus et aliquam
-                                                molestie.
-                                                Proin tincidunt ligula augue, ac pharetra est pharetra ut. Fusce
-                                                facilisis lacus
-                                                non est tristique, sit amet commodo tellus rhoncus. Aliquam dignissim
-                                                feugiat
-                                                est, in bibendum metus tempus eu. Curabitur bibendum tincidunt
-                                                sodales.</p>
-                                            <p>Donec finibus massa non neque facilisis, eget maximus nunc egestas. Nam
-                                                eget
-                                                purus eu quam placerat cursus. Aenean euismod ligula tellus, a fermentum
-                                                urna
-                                                tristique finibus. Etiam porta, felis eget egestas laoreet, ante nisl
-                                                vehicula
-                                                ex, sit amet vestibulum tellus dui in est. In lectus neque, ultrices sed
-                                                sem a,
-                                                sodales euismod mauris. Mauris cursus arcu at leo scelerisque, ac
-                                                ultrices
-                                                mauris gravida. Vivamus at sodales diam. Integer diam neque, malesuada
-                                                et
-                                                dapibus ut, finibus eu nunc. Integer eget efficitur metus. Nam bibendum
-                                                interdum
-                                                nibh sed ultricies. Proin tincidunt libero et purus euismod congue.
-                                                Curabitur
-                                                neque nisl, ornare at suscipit quis, sodales id quam. Nulla interdum dui
-                                                in
-                                                libero porttitor, at rutrum lectus sollicitudin.</p>
-                                            <p>Integer eu pharetra elit, sit amet hendrerit tellus. Nunc ullamcorper sed
-                                                tortor
-                                                a commodo. Nam leo justo, elementum et consectetur sed, efficitur non
-                                                arcu.
-                                                Phasellus eget tellus sapien. Proin in velit lacus. Cras rhoncus
-                                                interdum diam
-                                                non blandit. Etiam metus urna, rutrum quis euismod vel, feugiat sed
-                                                tortor.
-                                                Mauris felis lacus, feugiat ut mollis at, lacinia quis orci.</p>
-                                        </div>
                                     </div>
                                 </div>
+                                <div class="paywallTrunk blur">
+                                    <p>Cras lobortis placerat tortor, et porttitor lacus vestibulum ac.
+                                        Suspendisse
+                                        volutpat tristique semper. Fusce convallis tortor eu eros tempor
+                                        imperdiet.
+                                        Donec porttitor ligula congue mauris semper feugiat. Nulla vitae gravida
+                                        neque.
+                                        Vestibulum vel odio finibus erat porttitor consectetur eget convallis
+                                        justo.
+                                        Cras fermentum convallis dui ac rhoncus. Mauris aliquet nibh sagittis mi
+                                        faucibus luctus. Nulla fringilla placerat ex ut condimentum. Morbi quam
+                                        mi,
+                                        pharetra ac vehicula ac, tempus quis nulla. Aenean laoreet, nisi
+                                        malesuada
+                                        convallis sagittis, justo sem tempus diam, at consectetur diam diam
+                                        vitae velit.
+                                        Nulla lacinia odio quis egestas rhoncus. In turpis arcu, feugiat a
+                                        congue eu,
+                                        venenatis vel sem. Nunc aliquet ut orci ut venenatis. Ut tortor turpis,
+                                        pulvinar
+                                        commodo posuere vel, iaculis vitae magna.</p>
+                                    <p>Fusce et arcu in lectus feugiat pulvinar quis in diam. Nulla facilisi.
+                                        Curabitur
+                                        vulputate sollicitudin consectetur. Pellentesque malesuada ac velit nec
+                                        iaculis.
+                                        Etiam nec elementum sapien. Vestibulum ut maximus massa, non ullamcorper
+                                        nibh.
+                                        Quisque tristique, ipsum sit amet convallis ultrices, justo leo
+                                        porttitor quam,
+                                        a vehicula odio leo vitae quam.</p>
+                                    <p>Nam vitae justo sit amet enim pellentesque blandit eget non massa. Cras
+                                        imperdiet
+                                        porttitor consequat. Nunc neque libero, condimentum eu augue et, tempor
+                                        malesuada nibh. Proin velit metus, ultrices quis pretium eget, blandit
+                                        vulputate
+                                        mauris. Aenean sollicitudin pretium magna sed ultrices. Pellentesque ut
+                                        est
+                                        magna. Donec cursus vehicula diam, at vulputate dui tincidunt et. Donec
+                                        id
+                                        efficitur diam. Ut a facilisis diam. Nulla mollis risus vel lorem
+                                        maximus
+                                        dapibus. Aenean vitae sapien massa. Ut et ante turpis. Duis egestas erat
+                                        tortor,
+                                        eu vulputate ex dapibus sit amet. Lorem ipsum dolor sit amet,
+                                        consectetur
+                                        adipiscing elit. Nulla luctus neque quam, sit amet rhoncus urna
+                                        tincidunt
+                                        vitae.</p>
+                                    <p>Cras venenatis, elit id ornare varius, nisl diam maximus felis, venenatis
+                                        volutpat erat metus vel leo. Sed ligula turpis, tristique non dolor a,
+                                        pulvinar
+                                        vehicula tortor. Nunc malesuada malesuada libero non condimentum. Sed
+                                        sapien
+                                        felis, aliquet in ipsum non, tincidunt commodo nibh. Nulla eget lectus
+                                        eget
+                                        lorem dignissim molestie vitae quis orci. Suspendisse enim tortor,
+                                        congue vitae
+                                        ullamcorper eget, sagittis rhoncus leo. Aliquam sagittis ut ante a
+                                        egestas.</p>
+                                    <p>Vivamus viverra erat orci, ut porttitor orci gravida sodales. Curabitur
+                                        suscipit
+                                        sem sapien, et maximus elit tincidunt a. Nunc lacinia finibus viverra.
+                                        Nulla
+                                        sodales sapien vitae urna pretium, sit amet feugiat augue hendrerit.
+                                        Cras ipsum
+                                        nunc, placerat eget sapien et, bibendum faucibus magna. Nullam quis
+                                        augue a
+                                        justo tempus tincidunt et eu mi. Proin semper diam sit amet blandit
+                                        rutrum.
+                                        Proin vulputate massa nisl, ut pharetra tellus dapibus sed.</p>
+                                    <p>Curabitur felis sapien, ultrices id auctor sit amet, bibendum sit amet
+                                        nisl.
+                                        Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque eu
+                                        pellentesque erat. Vivamus pharetra magna eget risus luctus
+                                        sollicitudin. Proin
+                                        rutrum, augue id dapibus eleifend, erat arcu semper eros, id posuere
+                                        enim sem a
+                                        tortor. Morbi placerat, nibh id condimentum ultricies, est sem rutrum
+                                        sem, at
+                                        elementum neque turpis sed tellus. Integer blandit vehicula dui, id
+                                        dictum sem
+                                        egestas lobortis. Vivamus vel pretium elit. Nulla accumsan ipsum sed
+                                        libero
+                                        sagittis, id egestas dolor ullamcorper. Sed ultricies risus et aliquam
+                                        molestie.
+                                        Proin tincidunt ligula augue, ac pharetra est pharetra ut. Fusce
+                                        facilisis lacus
+                                        non est tristique, sit amet commodo tellus rhoncus. Aliquam dignissim
+                                        feugiat
+                                        est, in bibendum metus tempus eu. Curabitur bibendum tincidunt
+                                        sodales.</p>
+                                    <p>Donec finibus massa non neque facilisis, eget maximus nunc egestas. Nam
+                                        eget
+                                        purus eu quam placerat cursus. Aenean euismod ligula tellus, a fermentum
+                                        urna
+                                        tristique finibus. Etiam porta, felis eget egestas laoreet, ante nisl
+                                        vehicula
+                                        ex, sit amet vestibulum tellus dui in est. In lectus neque, ultrices sed
+                                        sem a,
+                                        sodales euismod mauris. Mauris cursus arcu at leo scelerisque, ac
+                                        ultrices
+                                        mauris gravida. Vivamus at sodales diam. Integer diam neque, malesuada
+                                        et
+                                        dapibus ut, finibus eu nunc. Integer eget efficitur metus. Nam bibendum
+                                        interdum
+                                        nibh sed ultricies. Proin tincidunt libero et purus euismod congue.
+                                        Curabitur
+                                        neque nisl, ornare at suscipit quis, sodales id quam. Nulla interdum dui
+                                        in
+                                        libero porttitor, at rutrum lectus sollicitudin.</p>
+                                    <p>Integer eu pharetra elit, sit amet hendrerit tellus. Nunc ullamcorper sed
+                                        tortor
+                                        a commodo. Nam leo justo, elementum et consectetur sed, efficitur non
+                                        arcu.
+                                        Phasellus eget tellus sapien. Proin in velit lacus. Cras rhoncus
+                                        interdum diam
+                                        non blandit. Etiam metus urna, rutrum quis euismod vel, feugiat sed
+                                        tortor.
+                                        Mauris felis lacus, feugiat ut mollis at, lacinia quis orci.</p>
+                                </div>
+                            </div>
+                        </div>
                     </article>
                 </div><!-- #content -->
                 <ul class="default-wp-page clearfix">
@@ -1277,16 +1283,16 @@
         $('.btn-primary2').removeClass("hide");
     });
 
-    $('.btn-primary2').on('click', function (e) {
-        $('.paywallTrunk').removeClass("blur"); //you can list several class names
-        $('.btn-secondary').addClass("hide"); //you can list several class names
-        $('.widget_300x250_advertisement').addClass("hide");
-        $('.widget_728x90_advertisement').addClass("hide");
-        $('.widget_125x125_advertisement').addClass("hide");
-        $("button.btn-primary2").replaceWith("<div class='validationBTN' style='float: left; margin-left: 10px;'>Thank You</div>");
-        $("div.wallet").replaceWith("<div class='wallet' style='margin-left: 3px;margin-top:3px;float: left'>Wallet: $4.96</div>");
-        e.preventDefault();
-    });
+    // $('.btn-primary2').on('click', function (e) {
+    //     $('.paywallTrunk').removeClass("blur"); //you can list several class names
+    //     $('.btn-secondary').addClass("hide"); //you can list several class names
+    //     $('.widget_300x250_advertisement').addClass("hide");
+    //     $('.widget_728x90_advertisement').addClass("hide");
+    //     $('.widget_125x125_advertisement').addClass("hide");
+    //     $("button.btn-primary2").replaceWith("<div class='validationBTN' style='float: left; margin-left: 10px;'>Thank You</div>");
+    //     $("div.wallet").replaceWith("<div class='wallet' style='margin-left: 3px;margin-top:3px;float: left'>Wallet: $4.96</div>");
+    //     e.preventDefault();
+    // });
 </script>
 </body>
 </html>

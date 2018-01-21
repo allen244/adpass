@@ -79,6 +79,8 @@ public class ArticleController {
             UserDetailsImpl avsUser = userService.updateUserAccount(user);
 
             model.addAttribute("avsUser", avsUser);
+
+            model.addAttribute("paid", "paid");
         }
 
         return "/article-reg";
