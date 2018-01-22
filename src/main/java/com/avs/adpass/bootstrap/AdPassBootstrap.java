@@ -2,16 +2,19 @@ package com.avs.adpass.bootstrap;
 
 import com.avs.adpass.domain.*;
 import com.avs.adpass.domain.security.Role;
+import com.avs.adpass.repositories.UserRepository;
 import com.avs.adpass.services.PartnerService;
 import com.avs.adpass.services.UserService;
 import com.avs.adpass.services.security.EncryptionService;
 import com.avs.adpass.services.security.RoleService;
+import com.avs.adpass.utils.AvsUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -19,10 +22,16 @@ public class AdPassBootstrap implements ApplicationListener<ContextRefreshedEven
 
     private UserService userService;
 
+    private UserRepository userRepository;
+
 
     private PartnerService partnerService;
     private RoleService roleService;
 
+    @Autowired
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Autowired
     public void setPartnerService(PartnerService partnerService) {
@@ -48,10 +57,20 @@ public class AdPassBootstrap implements ApplicationListener<ContextRefreshedEven
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        loadUsersAndParnter();
-        loadRoles();
-        assignUsersToDefaultRole();
-        assignUsersToAdminRole();
+
+
+        List<User> target = new ArrayList<>();
+        target = AvsUtils.toList(userRepository.findAll());
+
+        if (target != null && target.size() == 0) {
+
+
+            loadUsersAndParnter();
+            loadRoles();
+            assignUsersToDefaultRole();
+            assignUsersToAdminRole();
+
+        }
 
 
     }
@@ -125,11 +144,11 @@ public class AdPassBootstrap implements ApplicationListener<ContextRefreshedEven
         partner.setPhoneNumber("305.333.0101");
         address2.setPartner(partner);
         user1.setPartner(partner);
-      //  user2.setPartner(partner);
+        //  user2.setPartner(partner);
         partner.addAddressToPartner(address2);
 
         partner.addUserToPartner(user1);
-      //  partner.addUserToPartner(user2);
+        //  partner.addUserToPartner(user2);
 
 
         partnerService.savePartner(partner);

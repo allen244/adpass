@@ -18,7 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class AvsSecurityConfig extends WebSecurityConfigurerAdapter {
 
-
+    @Autowired
     private AuthenticationProvider authenticationProvider;
 
     @Autowired

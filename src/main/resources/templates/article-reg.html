@@ -601,102 +601,121 @@
 
 
                                 <div class="paywallButtons">
-                                    <button class="btn btn-secondary" style="float: left;margin-left: 22%" type="button">Continue with Ads</button>
+                                    <button th:if="${#bools.isFalse(paid)}" class="btn btn-secondary" style="float: left;margin-left: 22%"
+                                            type="button">Continue with Ads
+                                    </button>
                                     <button class="btn btn-primary" data-target="#myModal.bd-example-modal-lg"
                                             data-toggle="modal" style="float: left; margin-left: 10px" type="button"
                                             sec:authorize="!isAuthenticated()">
                                         Sign-Up for ADpass
                                     </button>
-                               <div class="btn-primary2" sec:authorize="isAuthenticated()"  th:if="${paid!=null}" th:replace="fragments/thankyou :: thankyou">
+                                    <div class="btn-primary2" sec:authorize="isAuthenticated()">
 
                                         <!--<button class="btn btn-primary2" sec:authorize="isAuthenticated()" style="float: left; margin-left: 10px;" type="button">Pay Using Ad Pass</button>-->
-                                   <a href="/pay" class="btn btn-primary2" role="button" sec:authorize="isAuthenticated()" style="float: left; margin-left: 10px;" >Pay Using Ad Pass</a>
-                                        <!--/*@thymesVar id="avsUser" type="com.avs.adpass.services.security.UserDetailsImpl"*/-->
-                                        <div class="wallet" style="margin-left: 3px;margin-top:3px;float: left">
 
-                                            Wallet: <span th:text="${avsUser.userAccount.accountBalance}"></span>
+                                        <div th:if="${#bools.isTrue(paid)}" class="validationBTN"
+                                             style="float: left; margin-left: 10px;">Thank You
+                                        </div>
+                                        <div th:if="${#bools.isTrue(paid)}" class="wallet"
+                                             style="margin-left: 3px;margin-top:3px;float: left"
+                                             th:text="${'Wallet: '+ avsUser.userAccount.accountBalance}">Wallet: $4.96
+                                        </div>
+
+
+                                        <div class="wallet" style="margin-left: 3px;margin-top:3px;float: left" th:if="${#bools.isFalse(paid)}">
+
+
+
+
+                                            <a href="/pay" class="btn btn-primary2"
+                                               role="button" style="float: left; margin-left: 10px;">Pay Using Ad
+                                                Pass</a>
+
+
                                         </div>
                                     </div>
-
-                             </div>
-
 
                                 </div>
 
 
-                                <!-- Modal -->
-                                <div aria-hidden="true" aria-labelledby="exampleModalLabel"
-                                     class="modal fade bd-example-modal-lg" id="myModal" role="dialog" tabindex="-1">
-                                    <div class="modal-dialog modal-lg" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button aria-label="Close" class="close" data-dismiss="modal"
-                                                        type="button"><span aria-hidden="true">&times;</span></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div id="container">
-                                                    <div class="theme-Bars" id="theme"></div>
-                                                    <div class="mainSignupCont">
-                                                        <div class="viveTitle">
-                                                            SIGNUP FOR <span class="theme-title">ADPASS</span>
+                            </div>
+
+
+                            <!-- Modal -->
+                            <div aria-hidden="true" aria-labelledby="exampleModalLabel"
+                                 class="modal fade bd-example-modal-lg" id="myModal" role="dialog" tabindex="-1">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button aria-label="Close" class="close" data-dismiss="modal"
+                                                    type="button"><span aria-hidden="true">&times;</span></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div id="container">
+                                                <div class="theme-Bars" id="theme"></div>
+                                                <div class="mainSignupCont">
+                                                    <div class="viveTitle">
+                                                        SIGNUP FOR <span class="theme-title">ADPASS</span>
+                                                    </div>
+                                                    <div class="theme-viveTitleSub">
+                                                        NO ADS, NO AD TRACKING
+                                                    </div>
+                                                    <div id="flex-container">
+                                                        <div class="flex-item right">
+                                                            <!--/*@thymesVar id="avsUser" type="com.avs.adpass.commands.RegistrationForm"*/-->
+                                                            <form th:object="${registerUser}"
+                                                                  th:action="@{/register}" method="post">
+
+                                                                <input type="hidden" name="partner" vale="NYDN"/>
+
+                                                                Create a free account:<br>
+                                                                <input name="username" placeholder="username"
+                                                                       type="username"><br>
+                                                                <input name="email" placeholder="email"
+                                                                       type="email"><br>
+                                                                <input name="password" placeholder="password"
+                                                                       type="password"><br>
+                                                                <input name="repeatpassword"
+                                                                       placeholder="repeat password"
+                                                                       type="password"><br>
+
+                                                                <button type="submit" class="submitBTN"
+                                                                        data-target="#myModal.bd-example-modal-lg"
+                                                                        data-toggle="modal">Submit
+                                                                </button>
+
+                                                            </form>
                                                         </div>
-                                                        <div class="theme-viveTitleSub">
-                                                            NO ADS, NO AD TRACKING
+                                                        <div class="flex-item left">
+
+                                                            <form th:object="${loginForm}" th:action="@{/login}"
+                                                                  method="post">
+                                                                Sign In:<br>
+                                                                <input type="text" placeholder="username"
+                                                                       name="username" id="username"/>
+
+
+                                                                <input type="password" placeholder="password"
+                                                                       name="password" id="password"/>
+
+
+                                                                <button type="submit" class="btn btn-default">
+                                                                    Submit
+                                                                </button>
+                                                            </form>
+
+
                                                         </div>
-                                                        <div id="flex-container">
-                                                            <div class="flex-item right">
-                                                                <!--/*@thymesVar id="avsUser" type="com.avs.adpass.commands.RegistrationForm"*/-->
-                                                                <form th:object="${registerUser}"
-                                                                      th:action="@{/register}" method="post">
-
-                                                                    <input type="hidden" name="partner" vale="NYDN"/>
-
-                                                                    Create a free account:<br>
-                                                                    <input name="username" placeholder="email"
-                                                                           type="username"><br>
-                                                                    <input name="email" placeholder="email"
-                                                                           type="email"><br>
-                                                                    <input name="password" placeholder="password"
-                                                                           type="password"><br>
-                                                                    <input name="repe" placeholder="repeat password"
-                                                                           type="password"><br>
-
-                                                                    <button type="submit" class="submitBTN"
-                                                                            data-target="#myModal.bd-example-modal-lg"
-                                                                            data-toggle="modal">Submit
-                                                                    </button>
-
-                                                                </form>
-                                                            </div>
-                                                            <div class="flex-item left">
-
-                                                                <form th:object="${loginForm}" th:action="@{/login}"
-                                                                      method="post">
-                                                                    Sign In:<br>
-                                                                    <input type="text" placeholder="username"
-                                                                           name="username" id="username"/>
-
-
-                                                                    <input type="password" placeholder="password"
-                                                                           name="password" id="password"/>
-
-
-                                                                    <button type="submit" class="btn btn-default">
-                                                                        Submit
-                                                                    </button>
-                                                                </form>
-
-
-                                                            </div>
-                                                            <div class="theme-Bars"></div>
-                                                        </div>
+                                                        <div class="theme-Bars"></div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="paywallTrunk blur">
+                            </div>
+                            <div class="paywallTrunk blur" th:class="${#bools.isTrue(paid)}? 'paywallTrunk' : 'paywallTrunk blur'">
+
                                     <p>Cras lobortis placerat tortor, et porttitor lacus vestibulum ac.
                                         Suspendisse
                                         volutpat tristique semper. Fusce convallis tortor eu eros tempor
@@ -848,7 +867,8 @@
                                         title="3:17 am"><i class="fa fa-calendar-o"></i> <time
                                         class="entry-date published" datetime="2017-11-03T03:17:08+00:00">November 3, 2017</time></a></span>
                                 <span class="byline"><span class="author vcard"><i class="fa fa-user"></i><a
-                                        class="url fn n" href="http://redoink.com/author/rurth24/" title="rurth24">rurth24</a></span></span>
+                                        class="url fn n" href="http://redoink.com/author/rurth24/"
+                                        title="rurth24">rurth24</a></span></span>
                                 <span class="comments"><i class="fa fa-comment"></i><a
                                         href="http://redoink.com/2017/11/03/womens-relay-competition/#respond">0</a></span>
                             </div>
@@ -873,7 +893,8 @@
                                         class="fa fa-calendar-o"></i> <time class="entry-date published"
                                                                             datetime="2017-11-03T03:17:08+00:00">November 3, 2017</time></a></span>
                                 <span class="byline"><span class="author vcard"><i class="fa fa-user"></i><a
-                                        class="url fn n" href="http://redoink.com/author/rurth24/" title="rurth24">rurth24</a></span></span>
+                                        class="url fn n" href="http://redoink.com/author/rurth24/"
+                                        title="rurth24">rurth24</a></span></span>
                                 <span class="comments"><i class="fa fa-comment"></i><a
                                         href="http://redoink.com/2017/11/03/destruction-in-montania/#respond">0</a></span>
                             </div>
@@ -899,7 +920,8 @@
                                         rel="bookmark" title="3:17 am"><i class="fa fa-calendar-o"></i> <time
                                         class="entry-date published" datetime="2017-11-03T03:17:08+00:00">November 3, 2017</time></a></span>
                                 <span class="byline"><span class="author vcard"><i class="fa fa-user"></i><a
-                                        class="url fn n" href="http://redoink.com/author/rurth24/" title="rurth24">rurth24</a></span></span>
+                                        class="url fn n" href="http://redoink.com/author/rurth24/"
+                                        title="rurth24">rurth24</a></span></span>
                                 <span class="comments"><i class="fa fa-comment"></i><a
                                         href="http://redoink.com/2017/11/03/get-more-nutrition-in-every-bite/#respond">0</a></span>
                             </div>

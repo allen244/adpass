@@ -49,6 +49,8 @@ public class ArticleController {
                 model.addAttribute("avsUser", userDetails);
             }
 
+            model.addAttribute("paid", false);
+
 
         } else {
             model.addAttribute("registerUser", new RegistrationForm());
@@ -61,9 +63,19 @@ public class ArticleController {
     public String article(Model model, HttpServletRequest request) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!(auth instanceof AnonymousAuthenticationToken)) {
-
+            UserDetailsImpl userDetails = null;
             String url = request.getRequestURL().toString();
-            UserDetailsImpl userDetails = (UserDetailsImpl) auth.getPrincipal();
+
+
+            Object principal = auth.getPrincipal();
+
+            if (principal instanceof UserDetailsImpl) {
+                userDetails = (UserDetailsImpl) auth.getPrincipal();
+
+            } else {
+                userDetails = (UserDetailsImpl) auth.getDetails();
+
+            }
 
 
             User user = userService.findByUserName(userDetails.getUsername());
@@ -80,7 +92,7 @@ public class ArticleController {
 
             model.addAttribute("avsUser", avsUser);
 
-            model.addAttribute("paid", "paid");
+            model.addAttribute("paid", true);
         }
 
         return "/article-reg";
