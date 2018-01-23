@@ -32,8 +32,7 @@ public class RegistrationController {
 
     private AuthenticationProvider authenticationProvider;
 
-    @Autowired
-    @Qualifier("daoAuthenticationProvider")
+
     public void setAuthenticationProvider(AuthenticationProvider authenticationProvider) {
         this.authenticationProvider = authenticationProvider;
     }
@@ -67,12 +66,12 @@ public class RegistrationController {
                 log.debug(objectError.toString());
             });
 
-            return "/article-reg";
+            return "article-reg";
         }
 
         User user = userService.registerUser(partner, registrationForm);
         partner.addUserToPartner(user);
-        partnerService.savePartner(partner);
+      //  partnerService.savePartner(partner);
 
 
         if (user != null) {

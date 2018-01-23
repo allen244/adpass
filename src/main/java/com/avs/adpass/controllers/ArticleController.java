@@ -56,10 +56,10 @@ public class ArticleController {
             model.addAttribute("registerUser", new RegistrationForm());
         }
 
-        return "/article-reg";
+        return "article-reg";
     }
 
-    @GetMapping({"/pay"})
+    @GetMapping({"pay"})
     public String article(Model model, HttpServletRequest request) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!(auth instanceof AnonymousAuthenticationToken)) {
@@ -95,7 +95,7 @@ public class ArticleController {
             model.addAttribute("paid", true);
         }
 
-        return "/article-reg";
+        return "article-reg";
     }
 
 
