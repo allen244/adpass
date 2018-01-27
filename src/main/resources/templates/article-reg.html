@@ -124,7 +124,7 @@
                         <!-- #header-left-section -->
                         <div id="header-right-section">
                             <div class="clearfix" id="header-right-sidebar">
-                                <aside class="widget widget_728x90_advertisement clearfix" id="colormag_728x90_advertisement_widget-2">
+                                <aside  th:class="${#bools.isTrue(paid)}? 'widget widget_728x90_advertisement clearfix hide' : 'widget widget_728x90_advertisement clearfix'" id="colormag_728x90_advertisement_widget-2">
                                     <div class="advertisement_728x90">
                                         <div class="advertisement-content">
                                             <a class="single_ad_728x90" href="https://demo.themegrill.com/colormag-pro/" rel="nofollow" target="_blank">
@@ -612,7 +612,7 @@
         </ul>
     </div>
 </aside>
-<aside class="widget widget_125x125_advertisement clearfix" id="colormag_125x125_advertisement_widget-2">
+<aside  th:class="${#bools.isTrue(paid)}? 'widget widget_125x125_advertisement clearfix hide' : 'widget widget_125x125_advertisement clearfix'" id="colormag_125x125_advertisement_widget-2">
     <div class="advertisement_125x125">
         <div class="advertisement-title">
             <h3 class="widget-title">
@@ -730,7 +730,7 @@
         </aside>
     </div>
     <div class="tg-fourth-footer-widget">
-        <aside class="widget widget_300x250_advertisement clearfix" id="colormag_300x250_advertisement_widget-2">
+        <aside  th:class="${#bools.isTrue(paid)}? 'widget widget_300x250_advertisement clearfix hide' : 'widget widget_300x250_advertisement clearfix'"  id="colormag_300x250_advertisement_widget-2">
             <div class="advertisement_300x250">
                 <div class="advertisement-title">
                     <h3 class="widget-title">
@@ -870,9 +870,11 @@
     $('.btn-primary2').on('click', function (e) {
         // $('.paywallTrunk').removeClass("blur"); //you can list several class names
         // $('.btn-secondary').addClass("hide");
-        $('.widget_300x250_advertisement').addClass("hide");
-        $('.widget_728x90_advertisement').addClass("hide");
-        $('.widget_125x125_advertisement').addClass("hide");
+		
+		//alert("hehe");
+      //  $('.widget, .widget_300x250_advertisement, .clearfix').addClass("hide");
+      //  $('.widget, .widget_728x90_advertisement,  .clearfix').addClass("hide");
+      //  $('.widget, .widget_125x125_advertisement, .clearfix').addClass("hide");
         // $( "button.btn-primary2" ).replaceWith( "<div class='validationBTN'>Thank You - Wallet: $4.96<\/div>" );
         // $( "div.btn-primary2" ).addClass("full");
         // $( "div.wallet" ).addClass("hide");
