@@ -140,7 +140,7 @@
         href='https://demo.accesspressthemes.com/accesspress-mag/wp-content/plugins/scroll-triggered-boxes/assets/css/styles.min.css?ver=2.2.1'
         id='scroll-triggered-boxes-css' media='all' rel='stylesheet' type='text/css'>
     <!-- custom css for adpass -->
-    <link href="adpassv2.min.css" media='all' rel='stylesheet' type='text/css'>
+    <link href="/css/adpassv2.min.css" media='all' rel='stylesheet' type='text/css'>
     <!-- custom css for adpass -->
     <script src='https://demo.accesspressthemes.com/accesspress-mag/wp-includes/js/jquery/jquery.js?ver=1.12.4'
             type='text/javascript'>
@@ -377,9 +377,9 @@
                             <h2 class="site-description">a free theme by AccessPress Themes</h2></a>
                     </div><!-- .sitetext-wrap -->
                 </div><!-- .site-branding -->
-                <div class="header-ad hide">
+                <div class="header-ad" th:class="${#bools.isTrue(paid)}? 'header-ad hide' : 'header-ad'">
                     <aside class="widget widget_text" id="text-14">
-                        <div class="textwidget hide">
+                        <div class="textwidget">
                             <a href="https://accesspressthemes.com/wordpress-themes/accesspress-mag-pro/"><img
                                 src="https://demo.accesspressthemes.com/accesspress-mag/wp-content/uploads/2015/08/fashion-banner.png"></a>
                         </div>
@@ -580,11 +580,12 @@
                                     <button th:if="${#bools.isFalse(paid)}" class="btn btn-secondary" type="button">
                                         Continue with Ads
                                     </button>
-                                    <button class="btn btn-primary hide" data-target="#myModal.bd-example-modal-lg"
+                                    <button class="btn btn-primary" data-target="#myModal.bd-example-modal-lg"
                                             data-toggle="modal" type="button" sec:authorize="!isAuthenticated()">
                                         Sign-Up for ADpass
                                     </button>
-                                    <button class="btn btn-primary2" type="button" onclick="window.location.href='/pay?article=false'"
+                                    <button class="btn btn-primary2" type="button"
+                                            onclick="window.location.href='/pay?article=false'"
                                             sec:authorize="isAuthenticated()" th:if="${#bools.isFalse(paid)}">
                                         Pay with AdPass
                                     </button>
@@ -666,7 +667,8 @@
                                 </div>
 
 
-                                <div class="paywallTrunk blur" th:class="${#bools.isTrue(paid)}? 'paywallTrunk' : 'paywallTrunk blur'">
+                                <div class="paywallTrunk blur"
+                                     th:class="${#bools.isTrue(paid)}? 'paywallTrunk' : 'paywallTrunk blur'">
                                     <p>Ad his utinam possit petentium, quando perfecto elaboraret in sed. Audire impedit
                                         denique cum te, et intellegam disputando ius. Ex vitae expetendis cum, est elitr
                                         putant ut, errem utamur cu quo. Paulo diceret reprimique ea quo. Tation causae
@@ -821,9 +823,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="article-ad-section hide">
+                            <div class="article-ad-section"
+                                 th:class="${#bools.isTrue(paid)}? 'article-ad-section hide' : 'article-ad-section'">
                                 <aside class="widget widget_text widget-ads" id="text-13">
-                                    <div class="textwidget hide">
+                                    <div class="textwidget">
                                         <a href="https://accesspressthemes.com/wordpress-themes/accesspress-mag-pro/"><img
                                             alt="Banner ad"
                                             src="https://accesspressthemes.com/accesspress-mag/wp-content/uploads/2015/08/news-banner.png"></a>
@@ -1136,9 +1139,11 @@
                             </div><!-- .random-posts-wrapper -->
                         </div><!-- .random-posts -->
                     </aside>
-                    <aside class="widget widget_text" id="text-16">
+                    <aside class="widget widget_text"
+                           th:class="${#bools.isTrue(paid)}? 'widget widget_text hide' : 'widget widget_text'"
+                           id="text-16">
                         <h4 class="widget-title"><span>Advertising Here</span></h4>
-                        <div class="textwidget hide">
+                        <div class="textwidget">
                             <a href="javascript:void(0)"><img
                                 src="https://demo.accesspressthemes.com/accesspress-mag/wp-content/uploads/2015/08/ads-banner-sport-300-250.png"></a>
                         </div>
@@ -1437,9 +1442,11 @@
                             </li>
                         </ul>
                     </aside>
-                    <aside class="widget widget_text" id="text-17">
+                    <aside class="widget widget_text"
+                           th:class="${#bools.isTrue(paid)}? 'widget widget_text hide' : 'widget widget_text'"
+                           id="text-17">
                         <h4 class="widget-title"><span>Advertising Space</span></h4>
-                        <div class="textwidget hide">
+                        <div class="textwidget">
                             <a href="javascript:void(0)"><img
                                 src="https://demo.accesspressthemes.com/accesspress-mag/wp-content/uploads/2015/08/ads-banner-fashion-300-250.png"></a>
                         </div>
