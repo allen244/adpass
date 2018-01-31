@@ -14,40 +14,24 @@
     <link href="../../static/css/spring-core.css"
           th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>
 </head>
-<body >
+<body>
 
 
 <div class="container" style="height: 100vh;">
-    <div class="row" >
+    <div class="row">
         <div class="col-md-12">
-            <h1>Spring Security Demo</h1>
+            <a href="/article-reg">Article 1</a>
         </div>
     </div>
 
-    <div class="row" sec:authorize="isAuthenticated()">
+
+    <div class="row">
         <div class="col-md-10 col-md-offset-2">
-            <h2 style="color:green">User is Logged In</h2>
-            <p sec:authentication="principal.username">userName</p>
+            <a href="/article-regv2">Articel 2</a>
         </div>
     </div>
 
-    <div class="row" sec:authorize="!isAuthenticated()">
-        <div class="col-md-10 col-md-offset-2">
-            <h2 style="color:red">User is Logged Out</h2>
-        </div>
-    </div>
 
-    <div class="row" sec:authorize="hasRole('USER')">
-        <div class="col-md-10 col-md-offset-2">
-            <h2>User Has Role Admin</h2>
-        </div>
-    </div>
-
-    <div class="row" sec:authorize="hasRole('ADMIN')">
-        <div class="col-md-10 col-md-offset-2">
-            <h2>User Has Role User</h2>
-        </div>
-    </div>
 </div>
 </body>
 </html>

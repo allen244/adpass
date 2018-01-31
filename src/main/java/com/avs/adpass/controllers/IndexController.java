@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
@@ -28,10 +29,10 @@ public class IndexController {
     }
 
 
-    @RequestMapping({"/index"})
+    @RequestMapping({"/index", ""})
     public String index(Model model, Authentication authentication) {
 
-        return "index";
+        return "redirect:article-reg";
     }
 
     @RequestMapping("/access_denied")
@@ -40,7 +41,7 @@ public class IndexController {
     }
 
 
-    @RequestMapping("login")
+    @RequestMapping("/login")
     public String loginForm() {
 
         return "login";

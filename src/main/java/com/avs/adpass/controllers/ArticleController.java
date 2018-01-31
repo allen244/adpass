@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
@@ -34,7 +35,7 @@ public class ArticleController {
     }
 
 
-    @GetMapping({"/", ""})
+    @GetMapping("/article-reg")
     public String article(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!(auth instanceof AnonymousAuthenticationToken)) {
@@ -43,10 +44,13 @@ public class ArticleController {
 
             if (principal instanceof UserDetailsImpl) {
                 UserDetailsImpl userDetails = (UserDetailsImpl) auth.getPrincipal();
-                model.addAttribute("avsUser", userDetails);
+
+                User user = userService.findByUserName(userDetails.getUsername());
+                model.addAttribute("avsUser", user);
             } else {
                 UserDetailsImpl userDetails = (UserDetailsImpl) auth.getDetails();
-                model.addAttribute("avsUser", userDetails);
+                User user = userService.findByUserName(userDetails.getUsername());
+                model.addAttribute("avsUser", user);
             }
 
             model.addAttribute("paid", false);
@@ -59,8 +63,35 @@ public class ArticleController {
         return "article-reg";
     }
 
+    @GetMapping("/article-regv2")
+    public String articlev2(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!(auth instanceof AnonymousAuthenticationToken)) {
+
+            Object principal = auth.getPrincipal();
+
+            if (principal instanceof UserDetailsImpl) {
+                UserDetailsImpl userDetails = (UserDetailsImpl) auth.getPrincipal();
+                User user = userService.findByUserName(userDetails.getUsername());
+                model.addAttribute("avsUser", user);
+            } else {
+                UserDetailsImpl userDetails = (UserDetailsImpl) auth.getDetails();
+                User user = userService.findByUserName(userDetails.getUsername());
+                model.addAttribute("avsUser", user);
+            }
+
+            model.addAttribute("paid", false);
+
+
+        } else {
+            model.addAttribute("registerUser", new RegistrationForm());
+        }
+
+        return "article-regv2";
+    }
+
     @GetMapping({"pay"})
-    public String article(Model model, HttpServletRequest request) {
+    public String article(Model model, HttpServletRequest request, @RequestParam String article) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!(auth instanceof AnonymousAuthenticationToken)) {
             UserDetailsImpl userDetails = null;
@@ -95,7 +126,11 @@ public class ArticleController {
             model.addAttribute("paid", true);
         }
 
-        return "article-reg";
+        if (article != null && article.equals("true")) {
+            return "article-reg";
+        } else {
+            return "article-regv2";
+        }
     }
 
 

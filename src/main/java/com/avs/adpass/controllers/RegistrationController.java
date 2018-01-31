@@ -66,12 +66,12 @@ public class RegistrationController {
                 log.debug(objectError.toString());
             });
 
-            return "article-reg";
+
         }
 
         User user = userService.registerUser(partner, registrationForm);
         partner.addUserToPartner(user);
-      //  partnerService.savePartner(partner);
+        //  partnerService.savePartner(partner);
 
 
         if (user != null) {
@@ -86,7 +86,11 @@ public class RegistrationController {
 
         }
 
-        return "redirect:/";
+        if (registrationForm.getArticle().equals("true")) {
+            return "redirect:article-reg";
+        } else {
+            return "redirect:article-regv2";
+        }
     }
 
 
