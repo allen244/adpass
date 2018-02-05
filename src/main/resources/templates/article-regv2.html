@@ -600,9 +600,9 @@
                                     </div>
                                     <div class="buttonBordersBottom" sec:authorize="isAuthenticated()"
                                          th:if="${#bools.isTrue(paid)}">
-                                        <div class="wallet"
-                                             style="margin-left: 3px;margin-top:3px;float: left"
-                                             th:text="${'Wallet: '+ avsUser.userAccount.accountBalance}">Wallet: $4.96
+                                        <div class="wallet">
+
+                                            <span th:text="${'Wallet: '+ avsUser.userAccount.accountBalance}">Wallet: $4.96</span>
                                         </div>
                                     </div>
                                 </div>
