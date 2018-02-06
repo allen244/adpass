@@ -2,6 +2,7 @@ package com.avs.adpass.domain;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,7 +71,9 @@ public class UserAccount extends AbstractDomain {
 
     public void debit(BigDecimal amount) {
         BigDecimal remove = this.getAccountBalance().subtract(amount);
-        this.setAccountBalance(remove);
+        DecimalFormat df = new DecimalFormat("##.00");
+        String value= df.format(remove);
+        this.setAccountBalance(new BigDecimal(value));
 
     }
 

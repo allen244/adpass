@@ -110,7 +110,7 @@ public class ArticleController {
 
 
             User user = userService.findByUserName(userDetails.getUsername());
-            user.getUserAccount().debit(new BigDecimal(.5));
+            user.getUserAccount().debit(new BigDecimal(.04));
 
             // List<AccountDetails> accountDetails=user.getUserAccount().getAccountDetails();
 
