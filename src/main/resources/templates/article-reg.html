@@ -345,10 +345,10 @@
                                         </div>
                                     </div>
 
-                                    <div th:if="${#bools.isTrue(paid)}" class="validationBTN"
-                                         style="float: left; margin-left: 10px;">Thank You
+                                    <div th:if="${#bools.isTrue(paid)}" class="validationBTN">Thank You
                                     </div>
-                                    <div class="buttonBordersBottom" sec:authorize="isAuthenticated()" th:if="${#bools.isTrue(paid)}">
+                                    <div class="buttonBordersBottom" sec:authorize="isAuthenticated()"
+                                         th:if="${#bools.isTrue(paid)}">
                                         <div class="wallet">
                                             <span th:text="${'Wallet: '+ avsUser.userAccount.accountBalance}">Wallet: $4.96</span>
                                         </div>
@@ -380,7 +380,8 @@
                                                                       th:action="@{/register}"
                                                                       method="post">
                                                                     <input type="hidden" name="article" value="true"/>
-                                                                    <input type="hidden" name="partnerName" value="NYDN"/>
+                                                                    <input type="hidden" name="partnerName"
+                                                                           value="NYDN"/>
                                                                     Create a free account:<br>
                                                                     <input name="username" placeholder="username"
                                                                            type="username"><br>

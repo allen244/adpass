@@ -595,8 +595,7 @@
                                             th:text="${'Wallet: '+ avsUser.userAccount.accountBalance}">Wallet: $5.00</span>
                                         </div>
                                     </div>
-                                    <div th:if="${#bools.isTrue(paid)}" class="validationBTN"
-                                         style="float: left; margin-left: 10px;">Thank You
+                                    <div th:if="${#bools.isTrue(paid)}" class="validationBTN">Thank You
                                     </div>
                                     <div class="buttonBordersBottom" sec:authorize="isAuthenticated()"
                                          th:if="${#bools.isTrue(paid)}">
